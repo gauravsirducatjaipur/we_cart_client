@@ -27,31 +27,6 @@ function Products() {
 
 
 
-  useEffect(() => {
-    const token = localStorage.getItem('token')
-    const user = localStorage.getItem('user')
-
-    if (!token) {
-      navigate('/login')
-    }
-    else {
-      if (!user) {
-        axios.get('http://localhost:1300/api/user', { headers: { Authorization: `Bearer ${token}` } })
-          .then((res) => { dispatch(userData(res.data.user)) })
-          .catch((err) => {
-            console.log(err)
-            localStorage.removeItem('token')
-            navigate('/login')
-          })
-      }
-
-
-    }
-
-  }, [])
-
-
-
   if (items.length === 0) {
     return <h1>Loading...</h1>
   }
