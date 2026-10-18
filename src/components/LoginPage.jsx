@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import toast, { Toaster } from 'react-hot-toast';
 import { userData } from '../redux/userslice';
+import { BASE_URL } from '../../helper';
 
 function LoginPage() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function LoginPage() {
 
     setLoading(true);
     try {
-      const response = await axios.post('http://localhost:1300/api/login', formData);
+      const response = await axios.post(`${BASE_URL}/api/login`, formData);
       const { token, user, message } = response.data;
 
       if (!token) {
@@ -40,7 +41,7 @@ function LoginPage() {
 
       // Fetch user details if login response does not contain user data
       if (!loggedInUser) {
-        const userResponse = await axios.get('http://localhost:1300/api/user', { headers: { Authorization: `Bearer ${token}` } }
+        const userResponse = await axios.get(`${BASE_URL}/api/user`, { headers: { Authorization: `Bearer ${token}` } }
         );
         loggedInUser = userResponse.data.user;
       }

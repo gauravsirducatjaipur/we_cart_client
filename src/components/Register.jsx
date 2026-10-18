@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import { BASE_URL } from '../../helper';
 
 function Register() {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ function Register() {
     const { confirmPassword, terms, ...data } = formData;
 
     try {
-      const response = await axios.post('http://localhost:1300/api/signup', data);
+      const response = await axios.post(`${BASE_URL}/api/signup`, data);
       toast.success(response.data.message || 'Registration successful!', {
         duration: 2000,
         style: {

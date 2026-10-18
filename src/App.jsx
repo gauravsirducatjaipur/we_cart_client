@@ -11,6 +11,7 @@ import { useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { userData, logout } from './redux/userslice';
+import { BASE_URL } from '../helper';
 
 function App() {
   const navigate = useNavigate();
@@ -26,7 +27,7 @@ function App() {
 
     const getUser = async () => {
       try {
-        const res = await axios.get('http://localhost:1300/api/user', { headers: { Authorization: `Bearer ${token}` } });
+        const res = await axios.get(`${BASE_URL}/api/user`, { headers: { Authorization: `Bearer ${token}` } });
         dispatch(userData(res.data.user));
       } catch (err) {
         console.log('User authentication failed:', err.response?.data || err.message);
